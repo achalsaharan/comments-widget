@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+}
+
+.comments-container {
+    padding: 1rem;
+    border: 1px solid;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: #eee;
+}
+
+.comment {
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.comment-username {
+    font-weight: bolder;
+    margin: 0px 0px;
+}
+
+.comment-text {
+    margin: 0px 0px;
+}
+
+.reply-btn {
+    font-size: 0.7rem;
+    padding: 0 0.2rem;
+}
