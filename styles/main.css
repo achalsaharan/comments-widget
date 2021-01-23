@@ -30,3 +30,15 @@ body {
     font-size: 0.7rem;
     padding: 0 0.2rem;
 }
+
+.comment-reply-form-text {
+    display: block;
+    width: 300px;
+    height: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.comment-reply-post-btn {
+    font-size: 0.7rem;
+    padding: 0 0.2rem;
+}
