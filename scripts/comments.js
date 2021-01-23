@@ -8,7 +8,14 @@ const comments = [
                 username : 'arnavsaharan',
                 commentId : '4',
                 text : 'nested comment 1',
-                comments: []
+                comments: [
+                    {
+                        username: 'karnailsingh',
+                        commentId: 6,
+                        text: 'nested nested comment 1',
+                        comments: []
+                    }
+                ]
             },
             {
                 username : 'achalsaharan',
