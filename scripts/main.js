@@ -37,23 +37,27 @@ function createComments(comments) {
 }
 
 function handleReplyBtnClick(event){
-    console.log(event);
     const id = event.target.id;
-    const btn = event.target;
-    const commentForm = createCommentReplyFrom(id);
-    // commentForm.addEventListener('onsubmit', handleReplyPostClick(event), false);
-    const parentNode = btn.parentNode;
-    parentNode.replaceChild(commentForm, btn);
-    
+    const replyBtn = event.target;
 
+    // creating the reply form
+    const commentForm = createCommentReplyFrom(id);
+
+    // adding event listener to the submit btn on the form
+    commentForm.childNodes[1][1].addEventListener('click', handleReplyPostClick);
+
+    //replacing the reply btn with the reply form
+    const parentNode = replyBtn.parentNode;
+    parentNode.replaceChild(commentForm, replyBtn);
+    
 }
 
 function createCommentReplyFrom(id){
     const commentReplyForm = document.createElement('DIV');
     commentReplyForm.innerHTML =  `
-    <form id=${id}>
+    <form >
         <input type="text" class="comment-reply-form-text">
-        <input type="button" value="post" class="comment-reply-post-btn">
+        <input type="button" value="post" class="comment-reply-post-btn" id=${id}>
     </form>
     `;
 
@@ -62,15 +66,82 @@ function createCommentReplyFrom(id){
 
 function handleReplyPostClick(event) {
     event.preventDefault();
-    console.log(event);
+
+    //getting refrence to the text field in the form
+    const text = event.target.parentNode.childNodes[1].value;
+    console.log(text);
+    const commentId = event.target.id;
+    console.log('comment id is:'+commentId);
+    addReplyToComment(commentId, text);
+
+    //reverting back to showing back the reply button
+    const parentNode = event.target.parentNode;
+
+    //removing the post form
+    event.target.parentNode.childNodes[1].remove();
+    event.target.remove();
+
+    //adding back the reply button
+    const replyBtn = document.createElement('BUTTON');
+    replyBtn.innerHTML = 'reply';
+    replyBtn.setAttribute('class', 'reply-btn');
+    replyBtn.setAttribute('id', commentId);
+
+    parentNode.appendChild(replyBtn);
+
 }
 
-const commentsConainter = document.querySelector('.comments-container');
-const html = createComments(comments);
-commentsConainter.innerHTML = html;
+function addReplyToComment(commentId, text){
+    
+    for(let i=0; i<comments.length; i++){
+        addReplyDFS(comments[i], commentId, text);
+    }
 
-const buttons = document.querySelectorAll('.reply-btn');
-console.log(buttons);
-buttons.forEach(btn => {
-    btn.addEventListener('click', handleReplyBtnClick);
-});
+    console.log(comments);
+
+    paintComments();
+}
+
+function addReplyDFS(comment, commentId, text){
+    console.log(comment.commentId);
+    //base case
+    if(comment.commentId === commentId){
+        let comm = makeNewComment(text);
+        comment.comments.push(comm);
+        return;
+    }
+
+    //else check in the children
+    for(let i=0; i<comment.comments.length; i++){
+        addReplyDFS(comment.comments[i], commentId, text);
+    }
+
+    return;
+}
+
+function makeNewComment(text){
+    let comment = {
+        username: 'sunitasaharan',
+        commentId: '10',
+        time: new Date().getTime(),
+        text: text,
+        comments: []
+    }
+
+    return comment;
+}
+
+function paintComments(){
+    const commentsConainter = document.querySelector('.comments-container');
+    const html = createComments(comments);
+    commentsConainter.innerHTML = html;
+    
+    // adding event listeners to the reply buttons
+    const buttons = document.querySelectorAll('.reply-btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', handleReplyBtnClick);
+    });
+}
+
+// painting comments on the page
+paintComments();
