@@ -1,18 +1,18 @@
 const comments = [
     {
-        username : 'achalsaharan',
+        username : '@user1',
         commentId : '1',
         text : 'comment 1',
         time : '',
         comments : [
             {
-                username : 'arnavsaharan',
+                username : '@user2',
                 commentId : '4',
                 text : 'nested comment 1',
                 time : '',
                 comments: [
                     {
-                        username: 'karnailsingh',
+                        username: '@user1',
                         commentId: '6',
                         text: 'nested nested comment 1',
                         time : '',
@@ -21,7 +21,7 @@ const comments = [
                 ]
             },
             {
-                username : 'achalsaharan',
+                username : '@user3',
                 commentId : '5',
                 text : 'nested comment 2',
                 time : '',
@@ -30,14 +30,14 @@ const comments = [
         ]
     },
     {
-        username : 'arnavsaharan',
+        username : '@user3',
         commentId : '2',
         text : 'comment 2',
         time : '',
         comments : []
     },
     {
-        username : 'achalsaharan',
+        username : '@user4',
         commentId : '3',
         text : 'comment 3',
         time : '',

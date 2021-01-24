@@ -36,6 +36,16 @@ function createComments(comments) {
     return ans;
 }
 
+function addComment(event) {
+    let text = addCommentText.value;
+    const comment = makeNewComment(text);
+
+    comments.unshift(comment);
+    addCommentText.value = '';
+
+    paintComments();
+}
+
 function handleReplyBtnClick(event){
     const id = event.target.id;
     const replyBtn = event.target;
@@ -107,7 +117,7 @@ function addReplyDFS(comment, commentId, text){
     //base case
     if(comment.commentId === commentId){
         let comm = makeNewComment(text);
-        comment.comments.push(comm);
+        comment.comments.unshift(comm);
         return;
     }
 
@@ -121,8 +131,8 @@ function addReplyDFS(comment, commentId, text){
 
 function makeNewComment(text){
     let comment = {
-        username: 'sunitasaharan',
-        commentId: '10',
+        username: '@achalsaharan',
+        commentId: guid(),
         time: new Date().getTime(),
         text: text,
         comments: []
@@ -142,6 +152,20 @@ function paintComments(){
         btn.addEventListener('click', handleReplyBtnClick);
     });
 }
+
+function guid() {
+    let s4 = () => {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+const addCommentBtn = document.querySelector('.add-comment-btn');
+const addCommentText = document.querySelector('.add-comment-text');
+addCommentBtn.addEventListener('click', addComment);
 
 // painting comments on the page
 paintComments();

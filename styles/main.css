@@ -2,6 +2,16 @@ body {
     margin: 0;
 }
 
+.comment-form {
+    padding: 1rem;
+    border: 1px solid;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: #eee;
+}
+
 .comments-container {
     padding: 1rem;
     border: 1px solid;
@@ -20,6 +30,17 @@ body {
 .comment-username {
     font-weight: bolder;
     margin: 0px 0px;
+}
+
+.add-comment-text {
+    display: block;
+    width: 300px;
+    height: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.add-comment-btn {
+    margin-top: 1rem;
 }
 
 .comment-text {
