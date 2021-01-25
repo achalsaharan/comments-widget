@@ -5,6 +5,7 @@ body {
 .comment-form {
     padding: 1rem;
     border: 1px solid;
+    border-radius: 1rem;
     max-width: 600px;
     margin: auto;
     margin-top: 2rem;
@@ -15,6 +16,7 @@ body {
 .comments-container {
     padding: 1rem;
     border: 1px solid;
+    border-radius: 1rem;
     max-width: 600px;
     margin: auto;
     margin-top: 2rem;
