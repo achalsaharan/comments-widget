@@ -55,6 +55,12 @@ function handleReplyBtnClick(event){
 
     // adding event listener to the submit btn on the form
     commentForm.childNodes[1][1].addEventListener('click', handleReplyPostClick);
+    commentForm.childNodes[1][0].addEventListener('keydown', (event) => {
+        if(event.keyCode === 13){
+            event.preventDefault();
+            commentForm.childNodes[1][1].click();
+        }
+    })
 
     //replacing the reply btn with the reply form
     const parentNode = replyBtn.parentNode;
@@ -79,9 +85,7 @@ function handleReplyPostClick(event) {
 
     //getting refrence to the text field in the form
     const text = event.target.parentNode.childNodes[1].value;
-    console.log(text);
     const commentId = event.target.id;
-    console.log('comment id is:'+commentId);
     addReplyToComment(commentId, text);
 
     //reverting back to showing back the reply button
@@ -107,13 +111,10 @@ function addReplyToComment(commentId, text){
         addReplyDFS(comments[i], commentId, text);
     }
 
-    console.log(comments);
-
     paintComments();
 }
 
 function addReplyDFS(comment, commentId, text){
-    console.log(comment.commentId);
     //base case
     if(comment.commentId === commentId){
         let comm = makeNewComment(text);
@@ -166,6 +167,14 @@ function guid() {
 const addCommentBtn = document.querySelector('.add-comment-btn');
 const addCommentText = document.querySelector('.add-comment-text');
 addCommentBtn.addEventListener('click', addComment);
+
+// add eventlistener on input field to prevent form submission by hitting enter
+addCommentText.addEventListener('keydown', (event) => {
+    if(event.keyCode === 13){
+        event.preventDefault();
+        addCommentBtn.click();
+    }
+})
 
 // painting comments on the page
 paintComments();
